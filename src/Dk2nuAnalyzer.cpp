@@ -20,6 +20,8 @@ void Dk2nuAnalyzer::BookHistograms() {
                  "Smeared vs Energy;#Delta t [ns];E_{#nu} [GeV]",
                  100, -3., 20.,
                  100, 0., 6.);
+
+    hEnuPion =  new HistGroup<TH1F>("h_Enu_pion", 7, ";Neutrino Energy (GeV);Counts", 40, 0, 8);
 }
 
 void Dk2nuAnalyzer::SetupChain() {
@@ -58,6 +60,7 @@ void Dk2nuAnalyzer::Run() {
         chain_->GetEntry(i);
 
         int Nance = dk2nu_->ancestor.size();
+        double wgt = dk2nu_->nuray[1].wgt*dk2nu_->decay.nimpwt;
         if (Nance < 2) continue;
 
         double Enu = dk2nu_->nuray[1].E;
@@ -71,6 +74,13 @@ void Dk2nuAnalyzer::Run() {
         double dTr = dT + smear;
 
         smeared_vs_Energy->Fill(dTr, Enu);
+
+        int idx = deltaT_to_bin(dT);
+        if (idx >= 0) {
+           validate_dt_hist_count(hEnuPion->size()); // optional after init
+           hEnuPion->Fill(idx, Enu, 0, 0, wgt);
+        }
+
     }
 }
 
@@ -79,8 +89,11 @@ void Dk2nuAnalyzer::Save(const std::string& outname) {
     TFile* f = TFile::Open(outname.c_str(), "RECREATE");
 
     smeared_vs_Energy->Write();
+    hEnuPion->Write();
 
     f->Close();
 
     std::cout << "Saved output --->  " << outname << std::endl;
+    delete smeared_vs_Energy;
+    delete hEnuPion;
 }
