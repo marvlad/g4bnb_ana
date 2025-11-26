@@ -9,6 +9,8 @@
 #include <TH2.h>
 
 #include "dk2nu/tree/dk2nu.h"
+#include "HistGroup.h"
+#include "TimeBinning.h"
 
 class Dk2nuAnalyzer {
 public:
@@ -32,6 +34,6 @@ private:
 
     // Example histogram (you will add ALL yours)
     TH2F* smeared_vs_Energy;
+    HistGroup<TH1F> *hEnuPion; 
 };
-
 #endif
