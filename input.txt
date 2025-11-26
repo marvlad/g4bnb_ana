@@ -1,5 +1,1 @@
-/pnfs/annie/persistent/users/mascenci/general_grid/output/g4bnb_11192025/run_1433/run_1433.dk2nu.root
-/pnfs/annie/persistent/users/mascenci/general_grid/output/g4bnb_11192025/run_1433/run_1433.dk2nu.root
-/pnfs/annie/persistent/users/mascenci/general_grid/output/g4bnb_11192025/run_1433/run_1433.dk2nu.root
-/pnfs/annie/persistent/users/mascenci/general_grid/output/g4bnb_11192025/run_1433/run_1433.dk2nu.root
-/pnfs/annie/persistent/users/mascenci/general_grid/output/g4bnb_11192025/run_1433/run_1433.dk2nu.root
+/pnfs/annie/persistent/users/mascenci/general_grid/output/g4bnb_11192025/run_107/run_107.dk2nu.root
