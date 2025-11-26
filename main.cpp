@@ -10,6 +10,7 @@ int main() {
 
     ana.Run();
     ana.Save("analysis.root");
+    ana.PrintInfo();
 
     return 0;
 }

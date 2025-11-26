@@ -18,11 +18,16 @@ public:
 
     void Run();
     void Save(const std::string& outname);
+    void PrintInfo() const;
 
 private:
     void SetupChain();
     void BookHistograms();
     double ApplyTimeShift(double timeres, TRandom3* r, TH1D* prof, bool smear=true);
+    bool IsGoodFile(const std::string& fname) const;
+
+    int totalFiles_ = 0;
+    int goodFiles_ = 0;
 
     std::vector<std::string> files_;
 
