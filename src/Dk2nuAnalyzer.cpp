@@ -15,8 +15,7 @@ Dk2nuAnalyzer::Dk2nuAnalyzer(const std::vector<std::string>& files)
 
 void Dk2nuAnalyzer::BookHistograms() {
 
-    smeared_vs_Energy =
-        new TH2F("smeared_vs_Energy",
+    smeared_vs_Energy = new TH2F("smeared_vs_Energy",
                  "Smeared vs Energy;#Delta t [ns];E_{#nu} [GeV]",
                  100, -3., 20.,
                  100, 0., 6.);
@@ -76,10 +75,13 @@ void Dk2nuAnalyzer::Run() {
         smeared_vs_Energy->Fill(dTr, Enu);
 
         int idx = deltaT_to_bin(dT);
+
         if (idx >= 0) {
            validate_dt_hist_count(hEnuPion->size()); // optional after init
            hEnuPion->Fill(idx, Enu, 0, 0, wgt);
         }
+
+        hEnuPion->FillAll(Enu, 0, 0, wgt);
 
     }
 }
