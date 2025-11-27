@@ -10,8 +10,8 @@ include_directories(${ROOT_INCLUDE_DIRS})
 link_directories(${ROOT_LIBRARY_DIRS})
 
 # dk2nu include + lib
-include_directories(/al9g4bnb/local/dk2nu_install/include)
-link_directories(/al9g4bnb/local/dk2nu_install/lib)
+include_directories(/exp/annie/app/users/mascenci/g4bnb_detached/dk2nu/install/include)
+link_directories(/exp/annie/app/users/mascenci/g4bnb_detached/dk2nu/install/lib)
 
 # includes for your headers
 include_directories(${PROJECT_SOURCE_DIR}/include)
@@ -19,6 +19,7 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 add_executable(analysis
     main.cpp
     src/FileManager.cpp
+    src/HistogramManager.cpp
     src/Dk2nuAnalyzer.cpp
 )
 
