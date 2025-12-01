@@ -47,44 +47,72 @@ void Dk2nuAnalyzer::BookHistograms() {
                  "Smeared vs Energy;E_{#nu} [GeV];#Delta t t[ns]",
                  100, -3., 20.,
                  100, 0., 1.);
-
+    
     std::string histLabel = ";Neutrino Energy (GeV);Counts";
     std::string hist2DLabel = "Energy [GeV];#Delta t [ns]";
 
+    AxisConfig axisE_0_8  = {40, 0., 8.}; // 1D histogram nbins and limits
+    AxisConfig axisE_0_10  = {100, 0., 10.};  // 2D (energy) histogram nbins and limits
+    AxisConfig axisDt_0_1  = {100, 0., 1.};  // 2D (delta t) histogram nbins and limits
+
+    TH1Config hEmPi1D = {"hEnumuPionCfg", histLabel, axisE_0_8};
+    TH2Config hEmPi2D = {"h_deltat_vs_energy_numu_pion",";Neutrino " + hist2DLabel, axisE_0_10, axisDt_0_1};
+    TH2Config hEmPi2Dp = {"h_deltat_vs_energy_parent_pion",";Pion " + hist2DLabel, axisE_0_10, axisDt_0_1};
+
+    TH1Config hEePi1D = {"hEnuePionCfg", histLabel, axisE_0_8};
+    TH2Config hEePi2D = {"h_deltat_vs_energy_nue_pion",";Neutrino " + hist2DLabel, axisE_0_10, axisDt_0_1};
+    TH2Config hEePi2Dp = {"h_deltat_vs_energy_parent_pion_e",";Pion " + hist2DLabel, axisE_0_10, axisDt_0_1};
+
+    TH1Config hEmK1D = {"hEnumuKaonCfg", histLabel, axisE_0_8};
+    TH2Config hEmK2D = {"h_deltat_vs_energy_numu_kaon",";Neutrino " + hist2DLabel, axisE_0_10, axisDt_0_1};
+    TH2Config hEmK2Dp = {"h_deltat_vs_energy_parent_kaon",";Kaon " + hist2DLabel, axisE_0_10, axisDt_0_1};
+
+    TH1Config hEeK1D = {"hEnueKaonCfg", histLabel, axisE_0_8};
+    TH2Config hEeK2D = {"h_deltat_vs_energy_nue_kaon",";Neutrino " + hist2DLabel, axisE_0_10, axisDt_0_1};
+    TH2Config hEeK2Dp = {"h_deltat_vs_energy_parent_kaon_e",";Kaon " + hist2DLabel, axisE_0_10, axisDt_0_1};
+
+    TH1Config hEma1D = {"h_Enumu_all", histLabel, axisE_0_8};
+    TH2Config hEma2D = {"h_deltat_vs_energy_numu_all",";Neutrino " + hist2DLabel, axisE_0_10, axisDt_0_1};
+    TH2Config hEma2Dp = {"h_deltat_vs_energy_parent_numu_all",";All " + hist2DLabel, axisE_0_10, axisDt_0_1};
+
+    TH1Config hEea1D = {"h_Enue_all", histLabel, axisE_0_8};
+    TH2Config hEea2D = {"h_deltat_vs_energy_nue_all",";Neutrino " + hist2DLabel, axisE_0_10, axisDt_0_1};
+    TH2Config hEea2Dp = {"h_deltat_vs_energy_parent_nue_all",";All " + hist2DLabel, axisE_0_10, axisDt_0_1};
+
     // Numu + Pion
-    HistogramManager::HistGroupConfig hEnumuPionCfg = {"h_Enumu_pion", 7, histLabel, 40, 0, 8};
-    HistogramManager::TH2Config hEnumuPionh2Acfg = {"h_deltat_vs_energy_numu_pion", ";Neutrino " + hist2DLabel, 100, 0, 10, 100, 0, 1};
-    HistogramManager::TH2Config hEnumuPionh2Bcfg = { "h_deltat_vs_energy_parent_pion", ";Pion " + hist2DLabel,  100, 0, 10, 100, 0, 1};
+    HistogramManager::HistGroupConfig hEnumuPionCfg = {hEmPi1D.name, 7, hEmPi1D.title, hEmPi1D.x.nbins, hEmPi1D.x.min, hEmPi1D.x.max};
+    HistogramManager::TH2Config hEnumuPionh2Acfg = {hEmPi2D.name, hEmPi2D.title, hEmPi2D.x.nbins, hEmPi2D.x.min, hEmPi2D.x.max, hEmPi2D.y.nbins, hEmPi2D.y.min, hEmPi2D.y.max};
+    HistogramManager::TH2Config hEnumuPionh2Bcfg = {hEmPi2Dp.name, hEmPi2Dp.title, hEmPi2Dp.x.nbins, hEmPi2Dp.x.min, hEmPi2Dp.x.max, hEmPi2Dp.y.nbins, hEmPi2Dp.y.min, hEmPi2Dp.y.max};
     hEnumuPion = new HistogramManager(hEnumuPionCfg, hEnumuPionh2Acfg, hEnumuPionh2Bcfg);
 
     // Nue + Pion
-    HistogramManager::HistGroupConfig hEnuePionCfg = {"h_Enue_pion", 7, histLabel, 40, 0, 8};
-    HistogramManager::TH2Config hEnuePionh2Acfg = {"h_deltat_vs_energy_nue_pion", ";Neutrino " + hist2DLabel, 100, 0, 10, 100, 0, 1};
-    HistogramManager::TH2Config hEnuePionh2Bcfg = { "h_deltat_vs_energy_parent_pion_e", ";Pion " + hist2DLabel, 100, 0, 10, 100, 0, 1};
+    HistogramManager::HistGroupConfig hEnuePionCfg = {hEePi1D.name, 7, hEePi1D.title, hEePi1D.x.nbins, hEePi1D.x.min, hEePi1D.x.max};
+    HistogramManager::TH2Config hEnuePionh2Acfg = {hEePi2D.name, hEePi2D.title, hEePi2D.x.nbins, hEePi2D.x.min, hEePi2D.x.max, hEePi2D.y.nbins, hEePi2D.y.min, hEePi2D.y.max};
+    HistogramManager::TH2Config hEnuePionh2Bcfg = {hEePi2Dp.name, hEePi2Dp.title, hEePi2Dp.x.nbins, hEePi2Dp.x.min, hEePi2Dp.x.max, hEePi2Dp.y.nbins, hEePi2Dp.y.min, hEePi2Dp.y.max};
     hEnuePion = new HistogramManager(hEnuePionCfg, hEnuePionh2Acfg, hEnuePionh2Bcfg);
 
     // Numu + Kaon
-    HistogramManager::HistGroupConfig hEnumuKaonCfg = {"h_Enumu_kaon", 7, histLabel, 40, 0, 8};
-    HistogramManager::TH2Config hEnumuKaonh2Acfg = {"h_deltat_vs_energy_numu_kaon", ";Neutrino " + hist2DLabel, 100, 0, 10, 100, 0, 1};
-    HistogramManager::TH2Config hEnumuKaonh2Bcfg = { "h_deltat_vs_energy_parent_kaon", ";Kaon " + hist2DLabel,  100, 0, 10, 100, 0, 1};
+    HistogramManager::HistGroupConfig hEnumuKaonCfg = {hEmK1D.name, 7, hEmK1D.title, hEmK1D.x.nbins, hEmK1D.x.min, hEmK1D.x.max};
+    HistogramManager::TH2Config hEnumuKaonh2Acfg = {hEmK2D.name, hEmK2D.title, hEmK2D.x.nbins, hEmK2D.x.min, hEmK2D.x.max, hEmK2D.y.nbins, hEmK2D.y.min, hEmK2D.y.max};
+    HistogramManager::TH2Config hEnumuKaonh2Bcfg = {hEmK2Dp.name, hEmK2Dp.title, hEmK2Dp.x.nbins, hEmK2Dp.x.min, hEmK2Dp.x.max, hEmK2Dp.y.nbins, hEmK2Dp.y.min, hEmK2Dp.y.max};
     hEnumuKaon = new HistogramManager(hEnumuKaonCfg, hEnumuKaonh2Acfg, hEnumuKaonh2Bcfg);
 
     // Numu + Kaon_e
-    HistogramManager::HistGroupConfig hEnueKaonCfg = {"h_Enue_kaon", 7, histLabel, 40, 0, 8};
-    HistogramManager::TH2Config hEnueKaonh2Acfg = {"h_deltat_vs_energy_nue_kaon", ";Neutrino " + hist2DLabel, 100, 0, 10, 100, 0, 1};
-    HistogramManager::TH2Config hEnueKaonh2Bcfg = { "h_deltat_vs_energy_parent_kaon_e", ";Kaon " + hist2DLabel, 100, 0, 10, 100, 0, 1};
+    HistogramManager::HistGroupConfig hEnueKaonCfg = {hEeK1D.name, 7, hEeK1D.title, hEeK1D.x.nbins, hEeK1D.x.min, hEeK1D.x.max};
+    HistogramManager::TH2Config hEnueKaonh2Acfg = {hEeK2D.name, hEeK2D.title, hEeK2D.x.nbins, hEeK2D.x.min, hEeK2D.x.max, hEeK2D.y.nbins, hEeK2D.y.min, hEeK2D.y.max};
+    HistogramManager::TH2Config hEnueKaonh2Bcfg = {hEeK2Dp.name, hEeK2Dp.title, hEeK2Dp.x.nbins, hEeK2Dp.x.min, hEeK2Dp.x.max, hEeK2Dp.y.nbins, hEeK2Dp.y.min, hEeK2Dp.y.max};
     hEnueKaon = new HistogramManager(hEnueKaonCfg, hEnueKaonh2Acfg, hEnueKaonh2Bcfg);
 
     // Numu all
-    HistogramManager::HistGroupConfig hEnumuAllCfg = {"h_Enumu_all", 7, histLabel, 40, 0, 8};
-    HistogramManager::TH2Config hEnumuAllh2Acfg = {"h_deltat_vs_energy_numu_all", ";Neutrino " + hist2DLabel, 100, 0, 10, 100, 0, 1};
-    HistogramManager::TH2Config hEnumuAllh2Bcfg = { "h_deltat_vs_energy_parent_numu_all", ";All " + hist2DLabel, 100, 0, 10, 100, 0, 1};
+    HistogramManager::HistGroupConfig hEnumuAllCfg = {hEma1D.name, 7, hEma1D.title, hEma1D.x.nbins, hEma1D.x.min, hEma1D.x.max};
+    HistogramManager::TH2Config hEnumuAllh2Acfg = {hEma2D.name, hEma2D.title, hEma2D.x.nbins, hEma2D.x.min, hEma2D.x.max, hEma2D.y.nbins, hEma2D.y.min, hEma2D.y.max};
+    HistogramManager::TH2Config hEnumuAllh2Bcfg = {hEma2Dp.name, hEma2Dp.title, hEma2Dp.x.nbins, hEma2Dp.x.min, hEma2Dp.x.max, hEma2Dp.y.nbins, hEma2Dp.y.min, hEma2Dp.y.max};
     hEnumuAll = new HistogramManager(hEnumuAllCfg, hEnumuAllh2Acfg, hEnumuAllh2Bcfg);
 
     // Nue all
-    HistogramManager::HistGroupConfig hEnueAllCfg = {"h_Enue_all", 7, histLabel, 40, 0, 8};
-    HistogramManager::TH2Config hEnueAllh2Acfg = {"h_deltat_vs_energy_nue_all", ";Neutrino " + hist2DLabel, 100, 0, 10, 100, 0, 1};
-    HistogramManager::TH2Config hEnueAllh2Bcfg = { "h_deltat_vs_energy_parent_nue_all", ";All " + hist2DLabel, 100, 0, 10, 100, 0, 1};
+    HistogramManager::HistGroupConfig hEnueAllCfg = {hEea1D.name, 7, hEea1D.title, hEea1D.x.nbins, hEea1D.x.min, hEea1D.x.max};
+    HistogramManager::TH2Config hEnueAllh2Acfg = {hEea2D.name, hEea2D.title, hEea2D.x.nbins, hEea2D.x.min, hEea2D.x.max, hEea2D.y.nbins, hEea2D.y.min, hEea2D.y.max};
+    HistogramManager::TH2Config hEnueAllh2Bcfg = {hEea2Dp.name, hEea2Dp.title, hEea2Dp.x.nbins, hEea2Dp.x.min, hEea2Dp.x.max, hEea2Dp.y.nbins, hEea2Dp.y.min, hEea2Dp.y.max};
     hEnueAll = new HistogramManager(hEnueAllCfg, hEnueAllh2Acfg, hEnueAllh2Bcfg);
 
 }
@@ -167,6 +195,10 @@ void Dk2nuAnalyzer::Run() {
 
     for (Long64_t i = 0; i < N; i++) {
         chain_->GetEntry(i);
+        if(i%100000==0) {
+           std::cout << "\r\033[K";
+           std::cout << "Progress " << 100*i/N <<"% " << std::flush;
+        } 
         int Nance = dk2nu_->ancestor.size();
   
         //mpotnum = Npot;

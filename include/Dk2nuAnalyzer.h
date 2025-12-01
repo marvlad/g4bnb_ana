@@ -14,6 +14,7 @@
 #include "HistGroup.h"
 #include "TimeBinning.h"
 #include "HistogramManager.h"
+#include "HistogramConfig.h"
 
 class Dk2nuAnalyzer {
 public:
