@@ -52,8 +52,8 @@ void Dk2nuAnalyzer::BookHistograms() {
     std::string hist2DLabel = "Energy [GeV];#Delta t [ns]";
 
     AxisConfig axisE_0_8  = {40, 0., 8.}; // 1D histogram nbins and limits
-    AxisConfig axisE_0_10  = {100, 0., 10.};  // 2D (energy) histogram nbins and limits
-    AxisConfig axisDt_0_1  = {100, 0., 1.};  // 2D (delta t) histogram nbins and limits
+    AxisConfig axisE_0_10  = {200, 0., 20.};  // 2D (energy) histogram nbins and limits
+    AxisConfig axisDt_0_1  = {600, 0., 6.};  // 2D (delta t) histogram nbins and limits
 
     TH1Config hEmPi1D = {"hEnumuPionCfg", histLabel, axisE_0_8};
     TH2Config hEmPi2D = {"h_deltat_vs_energy_numu_pion",";Neutrino " + hist2DLabel, axisE_0_10, axisDt_0_1};

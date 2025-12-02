@@ -3,7 +3,7 @@
 ## OVERVIEW
 
 g4bnb_ana is a small, modular C++ analysis tool designed for processing output from G4BNB, a GEANT4-based simulation of the Booster Neutrino Beamline (BNB) at Fermilab.
-It provides a simple interface for reading simulation output files, running custom analysis routines, and generating basic diagnostics or physics-driven summaries. This repo relays on the alg4bnb docker container.
+It provides a simple interface for reading simulation output files, running custom analysis routines, and generating basic diagnostics or physics-driven summaries. This repo relays on the alg4bnb docker container that returns the output files.
 
 # REPOSITORY STRUCTURE
 
